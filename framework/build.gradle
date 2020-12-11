@@ -1,0 +1,56 @@
+apply plugin: 'com.android.library'
+apply plugin: 'org.greenrobot.greendao'
+
+android {
+    compileSdkVersion 29
+
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    //异步调用依赖
+    api 'io.reactivex:rxandroid:1.2.1'
+    api 'io.reactivex:rxjava:1.2.1'
+
+    //okhttp
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    //添加HttpLoggingInterceptor进行调试 3.9.0版本是使用Java写的，从4.0.0后改用的Kotlin写的
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
+//    retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.1.0'
+    api 'com.squareup.retrofit2:converter-gson:2.1.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    //图片加载依赖
+//    compile 'com.github.bumptech.glide:glide:3.7.0'
+    api 'com.github.bumptech.glide:glide:4.1.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.1.1'
+
+    //    沉浸式状态栏
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+//  本地数据库操作
+    implementation 'org.greenrobot:greendao:3.3.0'
+}
+
+greendao{
+    schemaVersion 2
+}
